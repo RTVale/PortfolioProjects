@@ -40,9 +40,9 @@ SELECT location,
 	date, 
 	population, 
 	total_cases, 
-	(total_cases/population)*100 as CasePercentage
+	(total_cases/population)*100 AS CasePercentage
 FROM CovidDeaths
-WHERE location like '%states%'
+WHERE location LIKE '%states%'
 ORDER BY 1,2
 
 
@@ -52,7 +52,7 @@ ORDER BY 1,2
 SELECT location, 
 	population, 
 	MAX(total_cases) AS highest_infection_count, 
-	MAX((total_cases/population))*100 as PopulationInfected
+	MAX((total_cases/population))*100 AS PopulationInfected
 FROM CovidDeaths
 GROUP BY location, population
 ORDER BY PopulationInfected DESC
@@ -101,7 +101,7 @@ SELECT dea.continent,
 	dea.date, 
 	dea.population, 
 	vac.new_vaccinations, 
-	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as rolling_vaccinated
+	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition BY dea.Location ORDER BY dea.location, dea.Date) AS rolling_vaccinated
 FROM CovidDeaths dea
 JOIN CovidVaccinations vac
 	ON dea.location = vac.location
@@ -122,7 +122,7 @@ SELECT dea.continent,
 	dea.date, 
 	dea.population, 
 	vac.new_vaccinations, 
-	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as rolling_vaccinated
+	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition BY dea.Location ORDER BY dea.location, dea.Date) AS rolling_vaccinated
 FROM CovidDeaths dea
 JOIN CovidVaccinations vac
 	ON dea.location = vac.location
@@ -155,7 +155,7 @@ SELECT dea.continent,
 	dea.date, 
 	dea.population, 
 	vac.new_vaccinations, 
-	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as rolling_vaccinated
+	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition BY dea.Location ORDER BY dea.location, dea.Date) AS rolling_vaccinated
 FROM CovidDeaths dea
 JOIN CovidVaccinations vac
 	ON dea.location = vac.location
@@ -176,7 +176,7 @@ SELECT dea.continent,
 	dea.date, 
 	dea.population, 
 	vac.new_vaccinations, 
-	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as rolling_vaccinated
+	SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition BY dea.Location ORDER BY dea.location, dea.Date) AS rolling_vaccinated
 FROM CovidDeaths dea
 JOIN CovidVaccinations vac
 	ON dea.location = vac.location
