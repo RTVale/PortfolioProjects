@@ -1,1 +1,1 @@
-This is a practice portfolio on projects usin SQL Server
+This is a practice portfolio on projects using SQL Server
